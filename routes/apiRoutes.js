@@ -1,9 +1,12 @@
+// Load Data
 const fs = require('fs');
 const { v4: uuidv4 } = require('uuid');
 const dbNotes = require('../db/db.json');
 
+// Routing
 module.exports = function (app) {
 
+    // Get
     app.get('/api/notes', function (req, res) {
         fs.readFile('./db/db.json', 'utf8', function (err, data) {
             if (err) {
@@ -14,6 +17,7 @@ module.exports = function (app) {
         });
     });
 
+    // Post
     app.post('/api/notes', function (req, res) {
 
         let notes = req.body;
@@ -38,6 +42,7 @@ module.exports = function (app) {
 
     });
 
+    // Delete
     app.delete('/api/notes/:id', function (req, res) {
         let noteId = req.params.id;
         fs.readFile('./db/db.json', 'utf8', function (err, data) {
